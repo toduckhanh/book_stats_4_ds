@@ -2,6 +2,7 @@
 title: "Cơ sở Thống kê cho Khoa học dữ liệu"
 author: "Tô Đức Khánh, Nguyễn Thành Duy"
 date: "2026-06-22"
+fontsize: 11pt
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: 
@@ -31,10 +32,24 @@ Nội dung bao gồm:
 
 ---
 
-## Phiên bản trực tuyến {-}
+## Phạm vi của cuốn sách {-}
 
-https://toduckhanh.github.io/stats_4_ds
 
-## Mã nguồn {-}
+## Phần mềm và code R {-}
 
-https://github.com/toduckhanh/stats_4_ds
+
+## Giấy phép {-}
+
+All the material in this book is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License (CC BY-NC-ND 4.0). You may not use this material except in compliance with the aforementioned license. The human-readable summary of the license states that:
+
+* **You are free to:**
+
+  * *Share* – Copy and redistribute the material in any medium or format.
+
+* **Under the following terms:**
+
+  * *Attribution* – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+  * *NonCommercial* – You may not use the material for commercial purposes.
+  * *NoDerivatives* – If you remix, transform, or build upon the material, you may not distribute the modified material.
+
+
