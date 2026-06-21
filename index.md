@@ -1,7 +1,7 @@
 --- 
 title: "Cơ sở Thống kê cho Khoa học dữ liệu"
 author: "Tô Đức Khánh, Nguyễn Thành Duy"
-date: "2026-06-21"
+date: "2026-06-22"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: 
