@@ -9,7 +9,7 @@ bibliography:
   - book.bib
   - packages.bib
 description: |
-  Giáo trình Cơ sở Thống kê cho Khoa học dữ liệu ...
+  Cơ sở Thống kê cho Khoa học dữ liệu ...
 link-citations: yes
 github-repo: toduckhanh/stats_4_ds
 url: "https://toduckhanh.github.io/book_stats_4_ds"
@@ -53,3 +53,14 @@ All the material in this book is licensed under the Creative Commons Attribution
   * *NoDerivatives* – If you remix, transform, or build upon the material, you may not distribute the modified material.
 
 
+# Về tác giả {-}
+
+...
+
+# Hướng dẫn sử dụng sách {-}
+
+...
+
+# Danh sách ký hiệu {-}
+
+...
