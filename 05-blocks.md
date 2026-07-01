@@ -17,8 +17,7 @@ You may refer to using `\@ref(eq:binom)`, like see Equation \@ref(eq:binom).
 Labeled theorems can be referenced in text using `\@ref(thm:tri)`, for example, check out this smart theorem \@ref(thm:tri).
 
 ::: {.theorem #tri}
-For a right triangle, if $c$ denotes the *length* of the hypotenuse
-and $a$ and $b$ denote the lengths of the **other** two sides, we have
+For a right triangle, if $c$ denotes the *length* of the hypotenuse and $a$ and $b$ denote the lengths of the **other** two sides, we have
 $$a^2 + b^2 = c^2$$
 :::
 

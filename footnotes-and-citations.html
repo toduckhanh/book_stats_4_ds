@@ -4,23 +4,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>4 Footnotes and citations | Cơ sở Thống kê cho Khoa học dữ liệu</title>
-<meta name="author" content="Tô Đức Khánh, Nguyễn Thành Duy">
+<title>Chương 4 Footnotes and citations | Cơ sở Thống kê cho Khoa học dữ liệu</title>
+<meta name="author" content="Tô Đức Khánh, Nguyễn Thị Hồng Nhung, Nguyễn Thành Duy, Hồ Hữu Bình, …">
 <meta name="description" content="4.1 Footnotes Footnotes are put inside the square brackets after a caret ^[]. Like this one 1.  4.2 Citations Reference items in your bibliography file(s) using @key. For example, we are using the...">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content="4 Footnotes and citations | Cơ sở Thống kê cho Khoa học dữ liệu">
+<meta property="og:title" content="Chương 4 Footnotes and citations | Cơ sở Thống kê cho Khoa học dữ liệu">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://toduckhanh.github.io/book_stats_4_ds/footnotes-and-citations.html">
 <meta property="og:image" content="https://toduckhanh.github.io/book_stats_4_ds/images/cover.png">
 <meta property="og:description" content="4.1 Footnotes Footnotes are put inside the square brackets after a caret ^[]. Like this one 1.  4.2 Citations Reference items in your bibliography file(s) using @key. For example, we are using the...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="4 Footnotes and citations | Cơ sở Thống kê cho Khoa học dữ liệu">
+<meta name="twitter:title" content="Chương 4 Footnotes and citations | Cơ sở Thống kê cho Khoa học dữ liệu">
 <meta name="twitter:description" content="4.1 Footnotes Footnotes are put inside the square brackets after a caret ^[]. Like this one 1.  4.2 Citations Reference items in your bibliography file(s) using @key. For example, we are using the...">
 <meta name="twitter:image" content="https://toduckhanh.github.io/book_stats_4_ds/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      // Search -> Tìm kiếm
+      document.querySelectorAll('input[type="search"]').forEach(function(el){
+        if(el.placeholder === "Search"){
+          el.placeholder = "Tìm kiếm";
+        }
+      });
+
+    });
+    </script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      document.querySelectorAll(".sidebar h2").forEach(function(el){
+        if(el.textContent.trim().toLowerCase() === "table of contents"){
+          el.textContent = "Mục lục";
+        }
+      });
+
+    });
+    </script><script>
     window.addEventListener("load", function() {
 
       const toc = document.querySelector(".book-toc");
@@ -42,6 +63,101 @@
         );
 
       }
+    });
+    </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+
+      TeX: {
+
+        equationNumbers: {
+          autoNumber: "AMS"
+        },
+
+        Macros: {
+
+          /* Number sets */
+          R: "\\mathbb{R}",
+          N: "\\mathbb{N}",
+          Z: "\\mathbb{Z}",
+          Q: "\\mathbb{Q}",
+          C: "\\mathbb{C}",
+
+          /* Probability */
+          Prob: "\\mathbb{P}",
+          E: "\\mathbb{E}",
+
+          Var: ["\\operatorname{Var}",0],
+          Cov: ["\\operatorname{Cov}",0],
+          Corr: ["\\operatorname{Corr}",0],
+          Bias: ["\\operatorname{Bias}",0],
+          MSE: ["\\operatorname{MSE}",0],
+          SE: ["\\operatorname{SE}",0],
+          RMSE: ["\\operatorname{RMSE}",0],
+
+          /* Distributions */
+          Ber: ["\\operatorname{Ber}",0],
+          Bin: ["\\operatorname{Bin}",0],
+          Poi: ["\\operatorname{Poi}",0],
+          Geo: ["\\operatorname{Geo}",0],
+          NegBin: ["\\operatorname{NegBin}",0],
+          Hyp: ["\\operatorname{Hyp}",0],
+
+          Unif: ["\\operatorname{Unif}",0],
+          Norm: "\\mathcal{N}",
+          Exp: ["\\operatorname{Exp}",0],
+          Gam: ["\\operatorname{Gamma}",0],
+          BetaDist: ["\\operatorname{Beta}",0],
+
+          /* Statistical procedures */
+          MLE: ["\\operatorname{MLE}",0],
+          MAP: ["\\operatorname{MAP}",0],
+          CI: ["\\operatorname{CI}",0],
+
+          /* Operators */
+          argmax: ["\\operatorname*{arg\\,max}",0],
+          argmin: ["\\operatorname*{arg\\,min}",0],
+
+          /* Indicator */
+          Ind: "\\mathrm{I}",
+
+          /* Convergence */
+          asto: "\\xrightarrow{\\mathrm{a.s.}}",
+          pto: "\\xrightarrow{P}",
+          dto: "\\xrightarrow{d}",
+          Ltwo: "\\xrightarrow{L^2}",
+
+          /* Independence */
+          iid: "\\stackrel{\\mathrm{iid}}{\\sim}",
+          indep: "\\perp\\!\\!\\!\\perp",
+
+          /* Matrix transpose */
+          trans: "^{\\mathsf T}",
+
+          /* Bold vectors */
+          bx: "\\mathbf{x}",
+          by: "\\mathbf{y}",
+          bz: "\\mathbf{z}",
+
+          bX: "\\mathbf{X}",
+          bY: "\\mathbf{Y}",
+
+          /* Bold Greek */
+          bbeta: "\\boldsymbol{\\beta}",
+          btheta: "\\boldsymbol{\\theta}",
+          bmu: "\\boldsymbol{\\mu}",
+          bSigma: "\\boldsymbol{\\Sigma}",
+
+          /* Differential */
+          ud: "\\,\\mathrm{d}",
+
+          /* Order notation */
+          op: "o_p",
+          Op: "O_p"
+
+        }
+
+      }
+
     });
     </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
@@ -95,23 +211,25 @@
 <li><a class="" href="v%E1%BB%81-t%C3%A1c-gi%E1%BA%A3.html">Về tác giả</a></li>
 <li><a class="" href="h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-s%E1%BB%AD-d%E1%BB%A5ng-s%C3%A1ch.html">Hướng dẫn sử dụng sách</a></li>
 <li><a class="" href="danh-s%C3%A1ch-k%C3%BD-hi%E1%BB%87u.html">Danh sách ký hiệu</a></li>
-<li><a class="" href="hello-bookdown.html"><span class="header-section-number">1</span> Hello bookdown</a></li>
-<li><a class="" href="cross.html"><span class="header-section-number">2</span> Cross-references</a></li>
-<li><a class="" href="parts.html"><span class="header-section-number">3</span> Parts</a></li>
+<li><a class="" href="d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA.html"><span class="header-section-number">1</span> Dữ liệu Thống kê</a></li>
+<li><a class="" href="bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn.html"><span class="header-section-number">2</span> Biến ngẫu nhiên</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">3</span> Trực quan hóa dữ liệu</a></li>
 <li><a class="active" href="footnotes-and-citations.html"><span class="header-section-number">4</span> Footnotes and citations</a></li>
 <li><a class="" href="blocks.html"><span class="header-section-number">5</span> Blocks</a></li>
 <li><a class="" href="sharing-your-book.html"><span class="header-section-number">6</span> Sharing your book</a></li>
-<li><a class="" href="references.html">References</a></li>
+<li class="book-part">Phụ lục</li>
+<li><a class="" href="m%E1%BB%99t-s%E1%BB%91-ch%E1%BB%A9ng-minh.html"><span class="header-section-number">A</span> Một số chứng minh</a></li>
+<li><a class="" href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html">Tài liệu tham khảo</a></li>
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/toduckhanh/stats_4_ds">View book source <i class="fab fa-github"></i></a></p>
+          
         </div>
       </nav>
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="footnotes-and-citations" class="section level1" number="4">
 <h1>
-<span class="header-section-number">4</span> Footnotes and citations<a class="anchor" aria-label="anchor" href="#footnotes-and-citations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Chương 4</span> Footnotes and citations<a class="anchor" aria-label="anchor" href="#footnotes-and-citations"><i class="fas fa-link"></i></a>
 </h1>
 <div id="footnotes" class="section level2" number="4.1">
 <h2>
@@ -124,7 +242,7 @@
 <span class="header-section-number">4.2</span> Citations<a class="anchor" aria-label="anchor" href="#citations"><i class="fas fa-link"></i></a>
 </h2>
 <p>Reference items in your bibliography file(s) using <code>@key</code>.</p>
-<p>For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="references.html#ref-R-bookdown">Xie 2026</a>)</span> (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="references.html#ref-xie2015">Xie 2015</a>)</span> (this citation was added manually in an external file book.bib).
+<p>For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-R-bookdown">Xie 2026</a>)</span> (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-xie2015">Xie 2015</a>)</span> (this citation was added manually in an external file book.bib).
 Note that the <code>.bib</code> files need to be listed in the index.Rmd with the YAML <code>bibliography</code> key.</p>
 <p>The RStudio Visual Markdown Editor can also make it easier to insert citations: <a href="https://rstudio.github.io/visual-markdown-editing/#/citations" class="uri">https://rstudio.github.io/visual-markdown-editing/#/citations</a></p>
 
@@ -132,7 +250,7 @@ Note that the <code>.bib</code> files need to be listed in the index.Rmd with th
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="parts.html"><span class="header-section-number">3</span> Parts</a></div>
+<div class="prev"><a href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">3</span> Trực quan hóa dữ liệu</a></div>
 <div class="next"><a href="blocks.html"><span class="header-section-number">5</span> Blocks</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -144,8 +262,7 @@ Note that the <code>.bib</code> files need to be listed in the index.Rmd with th
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/toduckhanh/stats_4_ds/blob/main/04-citations.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/toduckhanh/stats_4_ds/edit/main/04-citations.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
 </div>
     </nav>
@@ -157,7 +274,7 @@ Note that the <code>.bib</code> files need to be listed in the index.Rmd with th
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Cơ sở Thống kê cho Khoa học dữ liệu</strong>" was written by Tô Đức Khánh, Nguyễn Thành Duy. It was last built on 2026-06-22.</p>
+    <p>"<strong>Cơ sở Thống kê cho Khoa học dữ liệu</strong>" was written by Tô Đức Khánh, Nguyễn Thị Hồng Nhung, Nguyễn Thành Duy, Hồ Hữu Bình, …. It was last built on 2026-07-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

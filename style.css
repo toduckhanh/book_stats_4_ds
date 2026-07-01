@@ -1,76 +1,191 @@
 body {
-  font-size: 18px;
+font-size: 18px;
+line-height: 1.7;
 }
+
+/* =====================================================
+MAIN CONTENT
+===================================================== */
 
 main {
-  max-width: 950px;
-}
-
-h1 {
-  font-weight: 700;
-}
-
-h2 {
-  font-weight: 600;
-}
-
-h3 {
-  font-weight: 500;
+max-width: 1000px;
 }
 
 p {
-  text-align: justify;
+text-align: justify;
 }
 
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+/* =====================================================
+HEADINGS
+===================================================== */
+
+h1 {
+font-weight: 700;
 }
 
-.caption {
-  text-align: center;
-  font-style: italic;
+h2 {
+font-weight: 600;
 }
 
-pre {
-  border-radius: 6px;
+h3 {
+font-weight: 500;
 }
 
-code {
-  font-size: 90%;
+h1,
+h2,
+h3,
+h4 {
+color: #2C3E50;
 }
 
-.sidebar nav {
-  font-size: 0.95rem;
+/* =====================================================
+LINKS
+===================================================== */
+
+a {
+color: #2C3E50;
 }
+
+a:hover {
+color: #1a252f;
+}
+
+/* =====================================================
+TITLE PAGE (HTML)
+===================================================== */
 
 h1.title {
-    font-size: 3em;
-    text-align: center;
-    margin-top: 30px;
+font-size: 2.5em;
+text-align: center;
+margin-top: 30px;
+font-weight: 700;
 }
 
 .author {
-    text-align: center;
+text-align: center;
 }
 
 .date {
-    text-align: center;
+text-align: center;
 }
 
+/* =====================================================
+IMAGES
+===================================================== */
+
+img {
+display: block;
+margin-left: auto;
+margin-right: auto;
+max-width: 100%;
+height: auto;
+}
+
+.caption {
+text-align: center;
+font-style: italic;
+}
+
+/* =====================================================
+TABLES
+===================================================== */
+
+table {
+width: 100%;
+margin: 1em auto;
+}
+
+th {
+background-color: #f5f5f5;
+}
+
+th,
+td {
+padding: 8px 12px;
+}
+
+/* =====================================================
+CODE
+===================================================== */
+
+pre {
+border-radius: 6px;
+padding: 12px;
+}
+
+pre code {
+font-size: 0.9rem;
+}
+
+code {
+font-size: 90%;
+}
+
+/* =====================================================
+MATH
+===================================================== */
+
+.katex-display,
+.MathJax_Display {
+margin: 1.2em 0;
+}
+
+/* =====================================================
+SIDEBAR
+===================================================== */
+
+.sidebar nav {
+font-size: 0.95rem;
+line-height: 1.4;
+}
+
+/* =====================================================
+DOWNLOAD BUTTON
+===================================================== */
+
 .sidebar-download {
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #ddd;
+margin-top: 20px;
+padding-top: 15px;
+border-top: 1px solid #ddd;
 }
 
 .sidebar-download a {
-  font-weight: 500;
-  text-decoration: none;
-  color: #0d6efd;
+font-weight: 500;
+text-decoration: none;
+color: #0d6efd;
 }
 
 .sidebar-download a:hover {
-  text-decoration: underline;
+text-decoration: underline;
+}
+
+/* =====================================================
+THEOREM / DEFINITION / EXAMPLE
+===================================================== */
+
+.theorem,
+.definition,
+.example,
+.proposition {
+padding: 12px 16px;
+margin: 16px 0;
+border-left: 4px solid #2C3E50;
+background-color: #f8f9fa;
+}
+
+/* =====================================================
+VIETNAMESE UI LABELS
+===================================================== */
+
+/* On this page -> Trên trang này */
+
+#toc h2 {
+font-size: 0;
+margin-bottom: 10px;
+}
+
+#toc h2::after {
+content: "Trên trang này";
+font-size: 1.2rem;
+font-weight: 600;
 }

@@ -1,13 +1,14 @@
 --- 
 title: "Cơ sở Thống kê cho Khoa học dữ liệu"
-author: "Tô Đức Khánh, Nguyễn Thành Duy"
-date: "2026-06-22"
+author: "Tô Đức Khánh, Nguyễn Thị Hồng Nhung, Nguyễn Thành Duy, Hồ Hữu Bình, ..."
+date: "2026-07-01"
 fontsize: 11pt
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: 
   - book.bib
   - packages.bib
+biblio-style: apalike
 description: |
   Cơ sở Thống kê cho Khoa học dữ liệu ...
 link-citations: yes
@@ -64,3 +65,9 @@ All the material in this book is licensed under the Creative Commons Attribution
 # Danh sách ký hiệu {-}
 
 ...
+
+```{=latex}
+\mainmatter
+\pagestyle{main}
+```
+

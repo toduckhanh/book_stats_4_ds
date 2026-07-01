@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chương 1 Dữ liệu Thống kê | Cơ sở Thống kê cho Khoa học dữ liệu</title>
+<meta name="author" content="Tô Đức Khánh, Nguyễn Thị Hồng Nhung, Nguyễn Thành Duy, Hồ Hữu Bình, …">
+<meta name="description" content="1.1 Thống kê Thống kê (Statistics) là một ngành khoa học của việc thu thập, phân tích, biểu diễn và giải thích dữ liệu, nhằm tìm ra các bằng chứng để cung cố hoặc bác bỏ các giả thuyết khoa học,...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chương 1 Dữ liệu Thống kê | Cơ sở Thống kê cho Khoa học dữ liệu">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://toduckhanh.github.io/book_stats_4_ds/dữ-liệu-thống-kê.html">
+<meta property="og:image" content="https://toduckhanh.github.io/book_stats_4_ds/images/cover.png">
+<meta property="og:description" content="1.1 Thống kê Thống kê (Statistics) là một ngành khoa học của việc thu thập, phân tích, biểu diễn và giải thích dữ liệu, nhằm tìm ra các bằng chứng để cung cố hoặc bác bỏ các giả thuyết khoa học,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chương 1 Dữ liệu Thống kê | Cơ sở Thống kê cho Khoa học dữ liệu">
+<meta name="twitter:description" content="1.1 Thống kê Thống kê (Statistics) là một ngành khoa học của việc thu thập, phân tích, biểu diễn và giải thích dữ liệu, nhằm tìm ra các bằng chứng để cung cố hoặc bác bỏ các giả thuyết khoa học,...">
+<meta name="twitter:image" content="https://toduckhanh.github.io/book_stats_4_ds/images/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      // Search -> Tìm kiếm
+      document.querySelectorAll('input[type="search"]').forEach(function(el){
+        if(el.placeholder === "Search"){
+          el.placeholder = "Tìm kiếm";
+        }
+      });
+
+    });
+    </script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      document.querySelectorAll(".sidebar h2").forEach(function(el){
+        if(el.textContent.trim().toLowerCase() === "table of contents"){
+          el.textContent = "Mục lục";
+        }
+      });
+
+    });
+    </script><script>
+    window.addEventListener("load", function() {
+
+      const toc = document.querySelector(".book-toc");
+
+      if (toc) {
+
+        toc.insertAdjacentHTML(
+          "beforeend",
+          `
+          <div style="
+              margin-top:20px;
+              padding-top:15px;
+              border-top:1px solid #ddd;">
+            <a href="stats_4_ds.pdf" target="_blank">
+              📄 Download PDF
+            </a>
+          </div>
+          `
+        );
+
+      }
+    });
+    </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+
+      TeX: {
+
+        equationNumbers: {
+          autoNumber: "AMS"
+        },
+
+        Macros: {
+
+          /* Number sets */
+          R: "\\mathbb{R}",
+          N: "\\mathbb{N}",
+          Z: "\\mathbb{Z}",
+          Q: "\\mathbb{Q}",
+          C: "\\mathbb{C}",
+
+          /* Probability */
+          Prob: "\\mathbb{P}",
+          E: "\\mathbb{E}",
+
+          Var: ["\\operatorname{Var}",0],
+          Cov: ["\\operatorname{Cov}",0],
+          Corr: ["\\operatorname{Corr}",0],
+          Bias: ["\\operatorname{Bias}",0],
+          MSE: ["\\operatorname{MSE}",0],
+          SE: ["\\operatorname{SE}",0],
+          RMSE: ["\\operatorname{RMSE}",0],
+
+          /* Distributions */
+          Ber: ["\\operatorname{Ber}",0],
+          Bin: ["\\operatorname{Bin}",0],
+          Poi: ["\\operatorname{Poi}",0],
+          Geo: ["\\operatorname{Geo}",0],
+          NegBin: ["\\operatorname{NegBin}",0],
+          Hyp: ["\\operatorname{Hyp}",0],
+
+          Unif: ["\\operatorname{Unif}",0],
+          Norm: "\\mathcal{N}",
+          Exp: ["\\operatorname{Exp}",0],
+          Gam: ["\\operatorname{Gamma}",0],
+          BetaDist: ["\\operatorname{Beta}",0],
+
+          /* Statistical procedures */
+          MLE: ["\\operatorname{MLE}",0],
+          MAP: ["\\operatorname{MAP}",0],
+          CI: ["\\operatorname{CI}",0],
+
+          /* Operators */
+          argmax: ["\\operatorname*{arg\\,max}",0],
+          argmin: ["\\operatorname*{arg\\,min}",0],
+
+          /* Indicator */
+          Ind: "\\mathrm{I}",
+
+          /* Convergence */
+          asto: "\\xrightarrow{\\mathrm{a.s.}}",
+          pto: "\\xrightarrow{P}",
+          dto: "\\xrightarrow{d}",
+          Ltwo: "\\xrightarrow{L^2}",
+
+          /* Independence */
+          iid: "\\stackrel{\\mathrm{iid}}{\\sim}",
+          indep: "\\perp\\!\\!\\!\\perp",
+
+          /* Matrix transpose */
+          trans: "^{\\mathsf T}",
+
+          /* Bold vectors */
+          bx: "\\mathbf{x}",
+          by: "\\mathbf{y}",
+          bz: "\\mathbf{z}",
+
+          bX: "\\mathbf{X}",
+          bY: "\\mathbf{Y}",
+
+          /* Bold Greek */
+          bbeta: "\\boldsymbol{\\beta}",
+          btheta: "\\boldsymbol{\\theta}",
+          bmu: "\\boldsymbol{\\mu}",
+          bSigma: "\\boldsymbol{\\Sigma}",
+
+          /* Differential */
+          ud: "\\,\\mathrm{d}",
+
+          /* Order notation */
+          op: "o_p",
+          Op: "O_p"
+
+        }
+
+      }
+
+    });
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Cơ sở Thống kê cho Khoa học dữ liệu</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Lời nói đầu</a></li>
+<li><a class="" href="v%E1%BB%81-t%C3%A1c-gi%E1%BA%A3.html">Về tác giả</a></li>
+<li><a class="" href="h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-s%E1%BB%AD-d%E1%BB%A5ng-s%C3%A1ch.html">Hướng dẫn sử dụng sách</a></li>
+<li><a class="" href="danh-s%C3%A1ch-k%C3%BD-hi%E1%BB%87u.html">Danh sách ký hiệu</a></li>
+<li><a class="active" href="d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA.html"><span class="header-section-number">1</span> Dữ liệu Thống kê</a></li>
+<li><a class="" href="bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn.html"><span class="header-section-number">2</span> Biến ngẫu nhiên</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">3</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">4</span> Footnotes and citations</a></li>
+<li><a class="" href="blocks.html"><span class="header-section-number">5</span> Blocks</a></li>
+<li><a class="" href="sharing-your-book.html"><span class="header-section-number">6</span> Sharing your book</a></li>
+<li class="book-part">Phụ lục</li>
+<li><a class="" href="m%E1%BB%99t-s%E1%BB%91-ch%E1%BB%A9ng-minh.html"><span class="header-section-number">A</span> Một số chứng minh</a></li>
+<li><a class="" href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html">Tài liệu tham khảo</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="dữ-liệu-thống-kê" class="section level1" number="1">
+<h1>
+<span class="header-section-number">Chương 1</span> Dữ liệu Thống kê<a class="anchor" aria-label="anchor" href="#d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA"><i class="fas fa-link"></i></a>
+</h1>
+<div id="thống-kê" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Thống kê<a class="anchor" aria-label="anchor" href="#th%E1%BB%91ng-k%C3%AA"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Thống kê</strong> (<em>Statistics</em>) là một ngành khoa học của việc thu thập, phân tích, biểu diễn và giải thích dữ liệu, nhằm tìm ra các bằng chứng để cung cố hoặc bác bỏ các giả thuyết khoa học, với quy trình thống kê khép kín được biểu diễn trong Hình <a href="d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA.html#fig:quytrinh">1.1</a>.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:quytrinh"></span>
+<img src="images/quytrinh-thongke.png" alt="Quy trình thống kê từ đặt vấn đề nghiên cứu đến kết luận." width="80%"><p class="caption">
+Figure 1.1: Quy trình thống kê từ đặt vấn đề nghiên cứu đến kết luận.
+</p>
+</div>
+<p>Một số khái niệm sau cần làm rõ:</p>
+<ul>
+<li>Câu hỏi nghiên cứu là gì?</li>
+<li>Lập kế hoạch cho một nghiên cứu thống kê là gì?</li>
+<li>Ý nghĩa thống kê là gì? và tại sao ta phải sử dụng các phương pháp thống kê trong các vấn đề của sinh học?</li>
+</ul>
+<p>Một câu hỏi nghiên cứu là ``một câu hỏi mà một dự án nghiên cứu đặt ra để trả lời’’. Trong sinh học, câu hỏi nghiên cứu có thể là:</p>
+<ul>
+<li>sự khác biệt về hình thái giữa cua cái và cua đực, hay cua xanh và cam là gì?</li>
+<li>tại sao mức độ hoạt động của MAO (monoammino oxidase) lại khác nhau giữa các nhóm bệnh nhân tâm thần phân liệt?</li>
+<li>làm thế nào để phân loại các loài hoa iris dựa trên đặc điểm của chúng?</li>
+<li>có sự khác biệt nào giữa 3 loài chim cánh cụt: Adelie, Chinstrap và Gentoo?</li>
+<li>tỷ lệ 3:1 liệu có luôn luôn đúng trong di truyền?</li>
+<li>biểu hiện gen (gene expression) của một số gen có khác nhau giữa người bệnh và người khỏe mạnh?</li>
+<li>và nhiều hơn nữa …</li>
+</ul>
+<p>Lập kế hoạch nghiên cứu là một bước rất quan trọng trong nghiên cứu phân tích dữ liệu. Ta cần làm rõ những yếu tố sau:</p>
+<ol style="list-style-type: decimal">
+<li>Đối tượng của nghiên cứu, có thể là, người, động vật, thực vật, tế bào, máy móc, ….</li>
+<li>Khoanh vùng đối tượng của nghiên cứu, có thể là khu vực sinh sống; mức thu nhập, cơ quan trên cơ thể sinh vật (tim, não, cây, thân, lá), tình trạng sức khỏe.</li>
+<li>Các biến (ngẫu nhiên) cần được quan sát để phục vụ cho việc phân tích và trả lời câu hỏi nghiên cứu, bao gồm 02 loại biến: biến dạng số hay định lượng (quantitative variable) và biến danh mục hay biến định tính (qualitative variable).</li>
+<li>Cách thức thu thập dữ liệu (hay mẫu), thường là thông qua quan sát thực tế (observational study) hoặc thông quan các thí nghiệm (experimental study).</li>
+</ol>
+<p>Ta xét một số ví dụ sau.</p>
+<div class="example">
+<p><span id="exm:MAO" class="example"><strong>Ví dụ 1.1  (Monoamine oxidase (MAO) v.s. bệnh tâm thần phân liệt (schizophrenia)) </strong></span>Monoamine oxidase (MAO) là một loại enzyme được cho là có vai trò trong việc điều chỉnh hành vi của não bộ, đặc biệt, nồng độ MAO có thể liên quan tới các tình trạng của bệnh tâm thần phân liệt (schizophrenia), đọc thêm trong <span class="citation">Potkin et al. (<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-potkin1978paranoid">1978</a>)</span>.</p>
+<p>Theo thông tin tổng hợp từ bài báo khoa học, ta tổng hợp được các thông tin sau.</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Câu hỏi nghiên cứu:</strong> MAO có liên quan tới tình trạng của bệnh nhân tâm thần phân liệt?</li>
+<li>
+<strong>Đối tượng nghiên cứu:</strong> bệnh nhân tâm thần phân liệt với các tình trạng khác nhau.</li>
+<li>
+<strong>Khoanh vùng đối tượng:</strong> bệnh nhân tâm thần phân liệt tại một khu vực sinh sống nhất định.</li>
+<li>
+<strong>Biến cần quan sát:</strong>
+<ul>
+<li>nồng độ MAO của bệnh nhân tâm thần phân liệt;</li>
+<li>tình trạng bệnh;</li>
+<li>độ tuổi;</li>
+<li>giới tính.</li>
+</ul>
+</li>
+<li>
+<strong>Cách thức lấy mẫu:</strong> quan sát thu thập dữ liệu thực tế.</li>
+</ol>
+</div>
+<div class="example">
+<p><span id="exm:body" class="example"><strong>Ví dụ 1.2  (Kích thước cơ thể và mức tiêu thụ năng lượng) </strong></span>Chúng ta thường nghĩ rằng người to/lớn hơn thì sẽ cần nhiều năng lượng hơn. Nhưng liệu điều này có đúng? Để tìm hiểu về mối liên hệ giữa sự tiêu hao năng lượng và khối lượng không mỡ ở nam giới và phụ nữ, <span class="citation">Webb (<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-webb1981energy">1981</a>)</span> đã thực hiện một nghiên cứu trên 15 nam giới và nữ giới trưởng thành, tuổi từ 22 tới 55. Theo thông tin tổng hợp từ bài báo khoa học, ta có thể rút ra các ý chính sau.</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Câu hỏi nghiên cứu</strong>: Nhu cầu đồ ăn có liên quan tới kích thước cơ thể.</li>
+<li>
+<strong>Đối tượng nghiên cứu</strong>: người trưởng thành.</li>
+<li>
+<strong>Khoanh vùng đối tượng</strong>: người trưởng thành tại một khu vực sinh sống nhất định.</li>
+<li>
+<strong>Biến cần quan sát</strong>:
+<ul>
+<li>trọng lượng cơ thể không có chất béo (the fat-free body mass);</li>
+<li>năng lương tiêu thụ trong quá trình vận động tĩnh tại (suy nghĩ, đọc sách, nằm nghỉ);</li>
+<li>tuổi;</li>
+<li>giới tính.</li>
+</ul>
+</li>
+<li>
+<strong>Các thức lấy mẫu</strong>: thí nghiệm và ghi nhận quan sát dữ liệu thực tế.</li>
+</ol>
+</div>
+<div class="example">
+<p><span id="exm:AD" class="example"><strong>Ví dụ 1.3  (Chuẩn đoán sớm bệnh Alzheimer's) </strong></span>Bệnh Alzheimer là một bệnh thoái hoá thần kinh tiến triển, là nguyên nhân phổ biến nhất của chứng sa sút trí tuệ (dementia), đặc trưng bởi sự suy giảm dần về trí nhớ, khả năng tư duy, ngôn ngữ, và kỹ năng thực hành hàng ngày. Bệnh tiến triển qua nhiều giai đoạn, từ giai đoạn trước triệu chứng (preclinical), sang giai đoạn rối loạn nhận thức nhẹ (Mild Cognitive Impairment – MCI), rồi tới giai đoạn Alzheimer đã rõ ràng hơn về mặt lâm sàng. Hiện nay chưa có cách chữa khỏi Alzheimer, nhưng nếu phát hiện sớm, có thể can thiệp để làm chậm tiến triển, cải thiện chất lượng cuộc sống. Do đó, việc phát hiện sớm tình trạng bệnh của bệnh nhân có vai trò quan trọng trong y tế.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:ill-AD"></span>
+<img src="images/illustration_AD.png" alt="Hình minh họa quá trình suy giảm trí nhớ ở các mức độ từ nhẹ tới nặng của bệnh Alzheimer." width="60%"><p class="caption">
+Figure 1.2: Hình minh họa quá trình suy giảm trí nhớ ở các mức độ từ nhẹ tới nặng của bệnh Alzheimer.
+</p>
+</div>
+<p><span class="citation">Do Van et al. (<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-van2023lipidomic">2023</a>)</span> tiến hành đánh giá khả năng dự đoán nhóm tình trạng bệnh: suy giảm nhận thức chủ quan - subjective cognitive impairment (SCI), rối loạn nhận thức nhẹ (MCI) và bệnh Alzheimer, của các hồ sơ lipidomic (lipidomic profile) trong dịch não tủy (CSF) của người. Theo thông tin tổng hợp từ bài báo khoa học, ta có thể rút ra các ý chính như sau.</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Câu hỏi nghiên cứu</strong>: các giá trị của các loại chất béo (lipid) khác nhau có liên quan tới tiến trình phát triển bệnh?</li>
+<li>
+<strong>Đối tượng nghiên cứu</strong>: người trưởng thành có các triệu chứng rõ ràng của ba tình trạng bệnh.</li>
+<li>
+<strong>Khoanh vùng đối tượng</strong>: 1 thành phố nhất định.</li>
+<li>
+<strong>Biến cần quan sát</strong>:
+<ul>
+<li>tình trạng bệnh, bao gồm, SCI, MCI và AD;</li>
+<li>giá trị đo đạc của các lipid trong CFS, ví dụ: phospholipids (PC), phosphatidylethanolamines (PE).</li>
+</ul>
+</li>
+<li>
+<strong>Cách thức lấy mẫu</strong>: thu thập mẫu dịch tủy não của người tham gia và tiến hành phân tích trong phòng thí nghiệm.</li>
+</ol>
+</div>
+<div class="example">
+<p><span id="exm:Lung" class="example"><strong>Ví dụ 1.4  (Small round blue cell tumors (SRBCTs)) </strong></span>Small round blue cell tumors (SRBCTs) là một nhóm các khối u ác tính, thường gặp ở trẻ em và thanh thiếu niên, có đặc điểm mô học chung là tế bào nhỏ, hình tròn, nhân đậm màu nên khi nhuộm Hematoxylin–Eosin thường thấy như những ``tế bào tròn xanh’’ dưới kính hiển vi. Nhóm này không phải là một loại bệnh đơn lẻ mà bao gồm nhiều khối u khác nhau, điển hình như: Neuroblastoma, Ewing family of tumours, Rhabdomyosarcoma, Burkitt lymphoma . Việc phân loại được các loại tế bào ôm thư này rất quan trọng trong y tế, giúp cho các bác sĩ có các pháp đồ điều trị phù hợp. <span class="citation"><span class="nocase">Khan et al.</span> (<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-khan2001classification">2001</a>)</span> đã tiến hành một nghiên cứu trong đó sử dụng giá trị biểu hiện của 2308 gene (cDNA microarrays) làm chỉ số phân loại 4 nhóm tế bào ung thư. Theo thông tin tổng hợp từ bài báo khoa học, ta có thể rút ra các ý chính như sau.</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Câu hỏi nghiên cứu</strong>: giá trị biểu hiện của gene có thực sự khác biệt giữa các nhóm tế bào ung thư SRBCTs?</li>
+<li>
+<strong>Đối tượng nghiên cứu</strong>: trẻ em vả thanh thiếu niên bị mắc SRBCTs.</li>
+<li>
+<strong>Khoanh vùng đối tượng</strong>: 1 thành phố nhất định.</li>
+<li>
+<strong>Biến cần quan sát</strong>:
+<ul>
+<li>nhóm tế bào ung thư cụ thể;</li>
+<li>giá trị biểu hiện của các gene liên quan.</li>
+</ul>
+</li>
+<li>Cách thức lấy mẫu: thu thập mẫu sinh thiết khối u và mẫu dòng tế bào của người tham gia và tiến hành phân tích gene trong phòng thí nghiệm.</li>
+</ol>
+</div>
+<p>Từ các ví dụ trên, ta nhận thấy rằng các nghiên cứu sinh học dù là trong lĩnh vực nào, cũng phải xuất phát từ một cuâ hỏi nghiên cứu cụ thể và có các bước vạch kế hoạch thiết kế và thu hoạch mẫu cụ thể. Kết quả thu được qua quá trình phân tích thống kê sẽ là củ cố các nghi vấn trước đó hoặc bác bỏ chúng, khi này ta thường nói rằng “<em>kết quả có ý nghĩa thống kê</em>”. Vậy cụ từ “<em>ý nghĩa thống kê</em>” là gì? Một cách kỹ thuật, <strong>ý nghĩa thống kê</strong> là sự quyết định của nhà phân tích thống kê rằng các kết quả trong dữ liệu không phải là hệ quả của một sự may mắn ngẫu nhiên. <strong>Kiểm tra giả thuyết thống kê</strong> là phương pháp mà nhà phân tích đưa ra quyết định này.</p>
+</div>
+<div id="dữ-liệu-thống-kê-1" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Dữ liệu thống kê<a class="anchor" aria-label="anchor" href="#d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Một dữ liệu thống kê là một bộ <em>mẫu ngẫu nhiên</em> của các <em>đối tượng nghiên cứu</em>, nó bao gồm các thông tin mô tả <em>đặc tính của các đối tượng nghiên cứu</em>. Một bộ dữ liệu có thể được thu được thông qua việc quan sát và thu mẫu thực tế (<em>observations</em>), hoặc thu mẫu các đối tượng thông qua các thí nghiệm <em>experiments</em>. Một quần thể hay tổng thể (<em>population</em>) là bộ dữ liệu lớn bao gồm tất cả đối tượng nghiên cứu có thể được bao hàm trong câu hỏi nghiên cứu, trong khi đó mẫu (<em>sample</em>) là 1 phần nhỏ quần thể được lấy ngẫu nhiên và gồm các đối tượng đã được thu thập thông tin dữ liệu phục vụ nghiên cứu (xem Hình <a href="d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA.html#fig:pop-samp">1.3</a>). Một đối tượng nghiên cứu được coi là một đơn vị thống kê (<em>statistical unit</em>). Trong dữ liệu, một tính chất của đối tượng nghiên cứu thường được gán bởi một biến ngẫu nhiên (<em>random variable</em>).</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:pop-samp"></span>
+<img src="images/population_sample.png" alt="Minh họa quần thể (population) và mẫu ngẫu nhiên (sample)." width="80%"><p class="caption">
+Figure 1.3: Minh họa quần thể (population) và mẫu ngẫu nhiên (sample).
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:data-type"></span>
+<img src="images/data_type_1.png" alt="Sơ đồ phân chia dữ liệu: dữ liệu cấu trúc và dữ liệu phi cấu trúc." width="55%"><p class="caption">
+Figure 1.4: Sơ đồ phân chia dữ liệu: dữ liệu cấu trúc và dữ liệu phi cấu trúc.
+</p>
+</div>
+<p>Về mặt kỹ thuật, dữ liệu được phân thành hai dạng: <strong>dữ liệu có cấu trúc</strong> (<em>structured data</em>) và <strong>dữ liệu phi cấu trúc</strong> (<em>unstructured data</em>), như minh họa trong Hình <a href="d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA.html#fig:data-type">1.4</a>. Trong đó, dữ liệu có cấu trúc được chia thành hai nhóm chính là <strong>biến dạng số</strong> (<em>numerical variable</em>) và <strong>biến dạng thể loại</strong> (<em>categorical variable</em>). Ngược lại, dữ liệu phi cấu trúc bao gồm hình ảnh, âm thanh, văn bản và video.</p>
+<p>Cụ thể, dữ liệu có cấu trúc bao gồm các dạng sau.</p>
+<dl>
+<dt>Biến dạng số (<em>numerical variable</em> hay <em>quantitative variable</em>)</dt>
+<dd>
+Là biến ngẫu nhiên có giá trị là các số, dùng để biểu diễn hoặc đo lường đại lượng của đối tượng nghiên cứu. Biến dạng số được chia thành:
+<ul>
+<li>biến liên tục (<em>continuous variable</em>);</li>
+<li>biến rời rạc hay biến đếm (<em>discrete variable</em>).</li>
+</ul>
+</dd>
+<dt>Biến dạng thể loại (<em>categorical variable</em> hay <em>qualitative variable</em>)</dt>
+<dd>
+Là biến ngẫu nhiên có giá trị là các nhóm hoặc thể loại của đối tượng nghiên cứu. Hai dạng phổ biến là:
+<ul>
+<li>biến định danh (<em>nominal variable</em>);</li>
+<li>biến thứ bậc (<em>ordinal variable</em>).</li>
+</ul>
+Riêng đối với biến định danh, có thể phân thành:
+<ul>
+<li>biến nhị phân (<em>binary variable</em>), khi biến chỉ có hai giá trị;</li>
+<li>biến đa định danh (<em>multinomial nominal variable</em> hoặc <em>multinomial variable</em>), khi biến có từ ba giá trị trở lên.</li>
+</ul>
+</dd>
+</dl>
+<div class="example">
+<p><span id="exm:data" class="example"><strong>Ví dụ 1.5  (...) </strong></span>[[<em>cung cấp ví dụ về dữ liệu có cấu trúc và các dạng biến</em>]]</p>
+</div>
+</div>
+<div id="kỹ-thuật-thu-thập-dữ-liệu" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Kỹ thuật thu thập dữ liệu<a class="anchor" aria-label="anchor" href="#k%E1%BB%B9-thu%E1%BA%ADt-thu-th%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+</h2>
+<p>Về cơ bản ta có ba kỹ thuật lấy mẫu ngẫu nhiên cơ bản sau.</p>
+<dl>
+<dt>Lấy mẫu ngẫu nhiên đơn giản (<em>simple random sampling</em>)</dt>
+<dd>
+Là cách lấy mẫu ngẫu nhiên mà trong đó, ta chọn ngẫu nhiên <span class="math inline">\(n\)</span> đối tượng từ quần thể sao cho mỗi đối tượng chỉ được chọn một lần, với xác suất được chọn là như nhau và các đối tượng được chọn là độc lập với nhau.
+</dd>
+<dt>Lấy mẫu ngẫu nhiên theo cụm (<em>cluster random sampling</em>)</dt>
+<dd>
+Là cách lấy mẫu ngẫu nhiên mà trong đó, ta chọn ngẫu nhiên <strong>toàn bộ</strong> các thành viên của một hoặc nhiều cụm (nhóm) thay vì chỉ chọn từng thành viên riêng lẻ. Xem Hình <a href="d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA.html#fig:clus-samp">1.5</a>.
+</dd>
+<dt>Lấy mẫu ngẫu nhiên phân tầng (<em>stratified random sampling</em>)</dt>
+<dd>
+Là cách lấy mẫu mà trước tiên quần thể được chia thành các tầng (<em>strata</em>), trong đó các cá thể trong cùng một tầng có những đặc điểm tương đồng. Sau đó, tiến hành lấy mẫu ngẫu nhiên đơn giản trong từng tầng và kết hợp các mẫu này để tạo thành mẫu cuối cùng. Xem Hình <a href="d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA.html#fig:straf-samp">1.6</a>.
+</dd>
+</dl>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:clus-samp"></span>
+<img src="images/cluster_sample.png" alt="Hình minh họa hai phương pháp lấy mẫu theo cụm." width="80%"><p class="caption">
+Figure 1.5: Hình minh họa hai phương pháp lấy mẫu theo cụm.
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:straf-samp"></span>
+<img src="images/strafied_sample.png" alt="Hình minh họa hai phương pháp lấy mẫu theo phân tầng." width="80%"><p class="caption">
+Figure 1.6: Hình minh họa hai phương pháp lấy mẫu theo phân tầng.
+</p>
+</div>
+<div class="example">
+<p><span id="exm:sampling" class="example"><strong>Ví dụ 1.6  (...) </strong></span>[[<em>cung cấp ví dụ về dữ liệu và các lấy tương ứng</em>]]</p>
+</div>
+<div id="mô-phỏng-kết-quả-phân-phối-dữ-liệu" class="section level3" number="1.3.1">
+<h3>
+<span class="header-section-number">1.3.1</span> Mô phỏng kết quả phân phối dữ liệu<a class="anchor" aria-label="anchor" href="#m%C3%B4-ph%E1%BB%8Fng-k%E1%BA%BFt-qu%E1%BA%A3-ph%C3%A2n-ph%E1%BB%91i-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+</h3>
+<p>Dưới đây là ứng dụng Shiny tương tác cho phép thay đổi các tham số trực quan:</p>
+<iframe src="https://d4ncgj-th0nh0duy-nguy0n.shinyapps.io/Test/" width="100%" height="600px" data-external="1">
+</iframe>
+<p>Quá là tuyệt vời!!!</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="danh-s%C3%A1ch-k%C3%BD-hi%E1%BB%87u.html">Danh sách ký hiệu</a></div>
+<div class="next"><a href="bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn.html"><span class="header-section-number">2</span> Biến ngẫu nhiên</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA"><span class="header-section-number">1</span> Dữ liệu Thống kê</a></li>
+<li><a class="nav-link" href="#th%E1%BB%91ng-k%C3%AA"><span class="header-section-number">1.1</span> Thống kê</a></li>
+<li><a class="nav-link" href="#d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA-1"><span class="header-section-number">1.2</span> Dữ liệu thống kê</a></li>
+<li>
+<a class="nav-link" href="#k%E1%BB%B9-thu%E1%BA%ADt-thu-th%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">1.3</span> Kỹ thuật thu thập dữ liệu</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#m%C3%B4-ph%E1%BB%8Fng-k%E1%BA%BFt-qu%E1%BA%A3-ph%C3%A2n-ph%E1%BB%91i-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">1.3.1</span> Mô phỏng kết quả phân phối dữ liệu</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Cơ sở Thống kê cho Khoa học dữ liệu</strong>" was written by Tô Đức Khánh, Nguyễn Thị Hồng Nhung, Nguyễn Thành Duy, Hồ Hữu Bình, …. It was last built on 2026-07-01.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chương 3 Trực quan hóa dữ liệu | Cơ sở Thống kê cho Khoa học dữ liệu</title>
+<meta name="author" content="Tô Đức Khánh, Nguyễn Thị Hồng Nhung, Nguyễn Thành Duy, Hồ Hữu Bình, …">
+<meta name="description" content="3.1 Sự liên hệ giữa dữ liệu và biến ngẫu nhiên  3.1.1 Dữ liệu và biến ngẫu nhiên  Remark. Ta thống nhất các ký hiệu sau: Mẫu ngẫu nhiên (random sample): \(X_1, \ldots, X_n\) là các biến ngẫu nhiên...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chương 3 Trực quan hóa dữ liệu | Cơ sở Thống kê cho Khoa học dữ liệu">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://toduckhanh.github.io/book_stats_4_ds/trực-quan-hóa-dữ-liệu.html">
+<meta property="og:image" content="https://toduckhanh.github.io/book_stats_4_ds/images/cover.png">
+<meta property="og:description" content="3.1 Sự liên hệ giữa dữ liệu và biến ngẫu nhiên  3.1.1 Dữ liệu và biến ngẫu nhiên  Remark. Ta thống nhất các ký hiệu sau: Mẫu ngẫu nhiên (random sample): \(X_1, \ldots, X_n\) là các biến ngẫu nhiên...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chương 3 Trực quan hóa dữ liệu | Cơ sở Thống kê cho Khoa học dữ liệu">
+<meta name="twitter:description" content="3.1 Sự liên hệ giữa dữ liệu và biến ngẫu nhiên  3.1.1 Dữ liệu và biến ngẫu nhiên  Remark. Ta thống nhất các ký hiệu sau: Mẫu ngẫu nhiên (random sample): \(X_1, \ldots, X_n\) là các biến ngẫu nhiên...">
+<meta name="twitter:image" content="https://toduckhanh.github.io/book_stats_4_ds/images/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      // Search -> Tìm kiếm
+      document.querySelectorAll('input[type="search"]').forEach(function(el){
+        if(el.placeholder === "Search"){
+          el.placeholder = "Tìm kiếm";
+        }
+      });
+
+    });
+    </script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      document.querySelectorAll(".sidebar h2").forEach(function(el){
+        if(el.textContent.trim().toLowerCase() === "table of contents"){
+          el.textContent = "Mục lục";
+        }
+      });
+
+    });
+    </script><script>
+    window.addEventListener("load", function() {
+
+      const toc = document.querySelector(".book-toc");
+
+      if (toc) {
+
+        toc.insertAdjacentHTML(
+          "beforeend",
+          `
+          <div style="
+              margin-top:20px;
+              padding-top:15px;
+              border-top:1px solid #ddd;">
+            <a href="stats_4_ds.pdf" target="_blank">
+              📄 Download PDF
+            </a>
+          </div>
+          `
+        );
+
+      }
+    });
+    </script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+
+      TeX: {
+
+        equationNumbers: {
+          autoNumber: "AMS"
+        },
+
+        Macros: {
+
+          /* Number sets */
+          R: "\\mathbb{R}",
+          N: "\\mathbb{N}",
+          Z: "\\mathbb{Z}",
+          Q: "\\mathbb{Q}",
+          C: "\\mathbb{C}",
+
+          /* Probability */
+          Prob: "\\mathbb{P}",
+          E: "\\mathbb{E}",
+
+          Var: ["\\operatorname{Var}",0],
+          Cov: ["\\operatorname{Cov}",0],
+          Corr: ["\\operatorname{Corr}",0],
+          Bias: ["\\operatorname{Bias}",0],
+          MSE: ["\\operatorname{MSE}",0],
+          SE: ["\\operatorname{SE}",0],
+          RMSE: ["\\operatorname{RMSE}",0],
+
+          /* Distributions */
+          Ber: ["\\operatorname{Ber}",0],
+          Bin: ["\\operatorname{Bin}",0],
+          Poi: ["\\operatorname{Poi}",0],
+          Geo: ["\\operatorname{Geo}",0],
+          NegBin: ["\\operatorname{NegBin}",0],
+          Hyp: ["\\operatorname{Hyp}",0],
+
+          Unif: ["\\operatorname{Unif}",0],
+          Norm: "\\mathcal{N}",
+          Exp: ["\\operatorname{Exp}",0],
+          Gam: ["\\operatorname{Gamma}",0],
+          BetaDist: ["\\operatorname{Beta}",0],
+
+          /* Statistical procedures */
+          MLE: ["\\operatorname{MLE}",0],
+          MAP: ["\\operatorname{MAP}",0],
+          CI: ["\\operatorname{CI}",0],
+
+          /* Operators */
+          argmax: ["\\operatorname*{arg\\,max}",0],
+          argmin: ["\\operatorname*{arg\\,min}",0],
+
+          /* Indicator */
+          Ind: "\\mathrm{I}",
+
+          /* Convergence */
+          asto: "\\xrightarrow{\\mathrm{a.s.}}",
+          pto: "\\xrightarrow{P}",
+          dto: "\\xrightarrow{d}",
+          Ltwo: "\\xrightarrow{L^2}",
+
+          /* Independence */
+          iid: "\\stackrel{\\mathrm{iid}}{\\sim}",
+          indep: "\\perp\\!\\!\\!\\perp",
+
+          /* Matrix transpose */
+          trans: "^{\\mathsf T}",
+
+          /* Bold vectors */
+          bx: "\\mathbf{x}",
+          by: "\\mathbf{y}",
+          bz: "\\mathbf{z}",
+
+          bX: "\\mathbf{X}",
+          bY: "\\mathbf{Y}",
+
+          /* Bold Greek */
+          bbeta: "\\boldsymbol{\\beta}",
+          btheta: "\\boldsymbol{\\theta}",
+          bmu: "\\boldsymbol{\\mu}",
+          bSigma: "\\boldsymbol{\\Sigma}",
+
+          /* Differential */
+          ud: "\\,\\mathrm{d}",
+
+          /* Order notation */
+          op: "o_p",
+          Op: "O_p"
+
+        }
+
+      }
+
+    });
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Cơ sở Thống kê cho Khoa học dữ liệu</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Lời nói đầu</a></li>
+<li><a class="" href="v%E1%BB%81-t%C3%A1c-gi%E1%BA%A3.html">Về tác giả</a></li>
+<li><a class="" href="h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-s%E1%BB%AD-d%E1%BB%A5ng-s%C3%A1ch.html">Hướng dẫn sử dụng sách</a></li>
+<li><a class="" href="danh-s%C3%A1ch-k%C3%BD-hi%E1%BB%87u.html">Danh sách ký hiệu</a></li>
+<li><a class="" href="d%E1%BB%AF-li%E1%BB%87u-th%E1%BB%91ng-k%C3%AA.html"><span class="header-section-number">1</span> Dữ liệu Thống kê</a></li>
+<li><a class="" href="bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn.html"><span class="header-section-number">2</span> Biến ngẫu nhiên</a></li>
+<li><a class="active" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">3</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">4</span> Footnotes and citations</a></li>
+<li><a class="" href="blocks.html"><span class="header-section-number">5</span> Blocks</a></li>
+<li><a class="" href="sharing-your-book.html"><span class="header-section-number">6</span> Sharing your book</a></li>
+<li class="book-part">Phụ lục</li>
+<li><a class="" href="m%E1%BB%99t-s%E1%BB%91-ch%E1%BB%A9ng-minh.html"><span class="header-section-number">A</span> Một số chứng minh</a></li>
+<li><a class="" href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html">Tài liệu tham khảo</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="trực-quan-hóa-dữ-liệu" class="section level1" number="3">
+<h1>
+<span class="header-section-number">Chương 3</span> Trực quan hóa dữ liệu<a class="anchor" aria-label="anchor" href="#tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+</h1>
+<div id="sự-liên-hệ-giữa-dữ-liệu-và-biến-ngẫu-nhiên" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Sự liên hệ giữa dữ liệu và biến ngẫu nhiên<a class="anchor" aria-label="anchor" href="#s%E1%BB%B1-li%C3%AAn-h%E1%BB%87-gi%E1%BB%AFa-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0-bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn"><i class="fas fa-link"></i></a>
+</h2>
+<div id="dữ-liệu-và-biến-ngẫu-nhiên" class="section level3" number="3.1.1">
+<h3>
+<span class="header-section-number">3.1.1</span> Dữ liệu và biến ngẫu nhiên<a class="anchor" aria-label="anchor" href="#d%E1%BB%AF-li%E1%BB%87u-v%C3%A0-bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn"><i class="fas fa-link"></i></a>
+</h3>
+<div class="remark">
+<p><span id="sample" class="remark"><em>Remark</em>. </span>Ta thống nhất các ký hiệu sau:</p>
+<ul>
+<li>
+<strong>Mẫu ngẫu nhiên</strong> (<strong>random sample</strong>): <span class="math inline">\(X_1, \ldots, X_n\)</span> là các biến ngẫu nhiên độc lập và cùng phân phối (independent and identically distributed - iid).</li>
+<li>
+<strong>Dữ liệu quan sát</strong> (<strong>observed data</strong>): <span class="math inline">\(x_1, \ldots, x_n\)</span> là các giá trị thu được từ mẫu ngẫu nhiên.</li>
+<li>
+<strong>Bộ dữ liệu</strong> (<strong>dataset</strong>): tập hợp dữ liệu được lưu trữ để phân tích, có thể gồm nhiều biến, nhiều bảng hoặc nhiều kiểu dữ liệu khác nhau.</li>
+</ul>
+</div>
+</div>
+<div id="sự-chuyển-đổi-biến" class="section level3" number="3.1.2">
+<h3>
+<span class="header-section-number">3.1.2</span> Sự chuyển đổi biến<a class="anchor" aria-label="anchor" href="#s%E1%BB%B1-chuy%E1%BB%83n-%C4%91%E1%BB%95i-bi%E1%BA%BFn"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="ước-lượng-các-đặc-trưng-của-dữ-liệu" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Ước lượng các đặc trưng của dữ liệu<a class="anchor" aria-label="anchor" href="#%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-c%C3%A1c-%C4%91%E1%BA%B7c-tr%C6%B0ng-c%E1%BB%A7a-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+</h2>
+<p>Trong phần này, ta nghiên cứu các ước lượng của các đặc trưng của một biến ngẫu nhiên <span class="math inline">\(X\)</span> dựa trên một mẫu ngẫu nhiên, <span class="math inline">\(X_1, \ldots, X_n\)</span>, gồm <span class="math inline">\(n\)</span> biến ngẫu nhiên độc lập và cùng phân phối theo hàm phân phối <span class="math inline">\(F_{X}(x)\)</span>. Ta thường viết tắt bởi <span class="math inline">\(X_i \stackrel{\rm iid}{\sim} F_{X}(x)\)</span>, với <span class="math inline">\(i = 1, \ldots, n\)</span>.</p>
+<div id="phân-phối-thực-nghiệm" class="section level3" number="3.2.1">
+<h3>
+<span class="header-section-number">3.2.1</span> Phân phối thực nghiệm<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-ph%E1%BB%91i-th%E1%BB%B1c-nghi%E1%BB%87m"><i class="fas fa-link"></i></a>
+</h3>
+<p>Nhắc lại rằng mẫu ngẫu nhiên là một tập hợp các đơn vị thống kê được chọn từ quần thể và kỳ vọng có tính đại diện cho quần thể đó. Do đó, mặc dù phân phối lý thuyết của quần thể hay của biến ngẫu nhiên <span class="math inline">\(X\)</span> thường chưa biết, ta có thể sử dụng các giá trị quan sát của mẫu để xây dựng phân phối thực nghiệm (<strong>empirical distribution</strong>), từ đó suy luận về phân phối của quần thể.</p>
+<div class="definition">
+<p><span id="def:ecdf" class="definition"><strong>Định nghĩa 3.1  (Phân phối thực nghiệm) </strong></span>Xét một mẫu ngẫu nhiên <span class="math inline">\(X_1, \ldots, X_n\)</span>, độc lập và cùng phân phối của biến ngẫu nhiên <span class="math inline">\(X\)</span> có hàm phân phối tích lũy <span class="math inline">\(F_X(x) = \Pr(X \le x)\)</span>. Hàm phân phối tích lũy thực nghiệm (<strong>empirical cumulative distribution</strong> - ECDF) của <span class="math inline">\(X\)</span> được xác định bởi
+<span class="math display" id="eq:ecdf">\[\begin{equation}
+\widehat{F}_n(x) = \frac{1}{n}\sum_{i = 1}^{n} \Ind\left(X_i \le x\right),
+\tag{3.1}
+\end{equation}\]</span>
+là một ước lượng của <span class="math inline">\(F_X\)</span>, với <span class="math inline">\(\Ind(\cdot)\)</span> là hàm chỉ (indicator function) và được định nghĩa như sau:
+<span class="math display">\[
+\Ind\left(u \le a\right) = \begin{cases}
+1 &amp; \text{ nếu } u \le a, \\
+0 &amp; \text{ nếu } u &gt; a.
+\end{cases}
+\]</span></p>
+</div>
+<p>Hàm phân phối tích lũy thực nghiệm trong phương trình <a href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html#eq:ecdf">(3.1)</a> là một trong những công cụ cơ bản và lâu đời nhất của thống kê phi tham số. Ý tưởng xây dựng ECDF xuất phát từ việc thay thế phân phối lý thuyết chưa biết của quần thể bằng tần suất tích lũy quan sát được từ mẫu. Mặc dù khái niệm này đã xuất hiện từ rất sớm trong thống kê toán học, nền tảng lý thuyết của ECDF được thiết lập rõ ràng thông qua định lý Glivenko–Cantelli, chứng minh rằng hàm phân phối thực nghiệm hội tụ đều đến hàm phân phối thực của quần thể khi cỡ mẫu lớn <span class="citation">(<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-Glivenko1933">Glivenko 1933</a>; <a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-Cantelli1933">Cantelli 1933</a>)</span>. Kể từ đó, ECDF trở thành nền tảng của nhiều phương pháp thống kê phi tham số, bao gồm kiểm định Kolmogorov–Smirnov, kiểm định Cramér–von Mises, ước lượng phân vị và các kỹ thuật bootstrap hiện đại <span class="citation">(<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-vanDerVaart1998">Vaart 1998</a>; <a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-Wasserman2004">Wasserman 2004</a>)</span>.</p>
+<div class="theorem">
+<p><span id="thm:gliv" class="theorem"><strong>Định lý 3.1  (Định lý Glivenko--Cantelli) </strong></span>Xét một mẫu ngẫu nhiên <span class="math inline">\(X_1, \ldots, X_n\)</span>, độc lập và cùng phân phối của biến ngẫu nhiên <span class="math inline">\(X\)</span> có hàm phân phối tích lũy <span class="math inline">\(F_X(x)\)</span>. Ký hiệu <span class="math inline">\(\widehat{F}_n(x)\)</span> là hàm phân phối tích lũy thực nghiệm được xây dựng từ mẫu ngẫu nhiên. Khi đó,
+<span class="math display">\[
+\sup_{x\in\mathbb{R}} \left|\widehat{F}_n(x) - F_X(x) \right| \asto 0,
+\]</span>
+khi <span class="math inline">\(n \to +\infty\)</span>.</p>
+</div>
+<p>[[Bổ sung chứng minh trong phụ lục.]]</p>
+<p>Từ định lý Glivenko-Cantelli ta có kết quả quan trọng sau cho việc ước lượng phân phối tích lũy tại một giá trị cố định.</p>
+<div class="corollary">
+<p><span id="cor:ecdf-consistency" class="corollary"><strong>Hệ quả 3.1  </strong></span>Với mọi <span class="math inline">\(x \in \R\)</span>,
+<span class="math display">\[
+\widehat{F}_n(x) \asto F_X(x),
+\]</span>
+khi <span class="math inline">\(n \to +\infty\)</span>. Do đó, ta nói <span class="math inline">\(\widehat{F}_n(x)\)</span> là một ước lượng vững của <span class="math inline">\(F_X(x)\)</span>.</p>
+</div>
+</div>
+<div id="ước-lượng-mật-độ-xác-suất" class="section level3" number="3.2.2">
+<h3>
+<span class="header-section-number">3.2.2</span> Ước lượng mật độ xác suất<a class="anchor" aria-label="anchor" href="#%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-m%E1%BA%ADt-%C4%91%E1%BB%99-x%C3%A1c-su%E1%BA%A5t"><i class="fas fa-link"></i></a>
+</h3>
+<p>Hàm mật độ xác suất của biến ngẫu nhiên ngoài công dụng trong việc xác định xác suất tích lũy, thì nó cũng biểu diễn sự phân bố của giá trị lý thuyết của biến ngẫu nhiên, trong đó, vùng có giá trị mật độ xác suất cao nhất thì tương ứng với vùng có khả cao có thể quan sát được giá trị của biến ngẫu nhiên.</p>
+<p>Trong phần trước, ta đã được giới thiệu tới hàm phân phối tích lũy thực nghiệm <span class="math inline">\(\widehat{F}_n(x)\)</span>, từ hàm này, ta hoàn toàn có thể xác định được hàm mật độ xác suất cho mẫu ngẫu nhiên. Nhắc lại rằng, hàm mật độ xác suất lý thuyết của một biến ngẫu nhiên liên tục <span class="math inline">\(X\)</span>, được ký hiệu là <span class="math inline">\(f_X(x)\)</span> và được xác định bởi
+<span class="math display">\[f_X(x) = \dfrac{\ud}{\ud x} F_X(x)\]</span>,
+tức là đạo hàm của hàm phân phối tích lũy lý thuyết <span class="math inline">\(F_X(x)\)</span>.</p>
+<p>Xét một mẫu ngẫu nhiên <span class="math inline">\(X_1, \ldots, X_n\)</span>, độc lập và cùng phân phối của biến ngẫu nhiên <span class="math inline">\(X\)</span> có hàm phân phối tích lũy <span class="math inline">\(F_X(x)\)</span> và hàm mật độ xác suất <span class="math inline">\(f_X(x)\)</span> (chưa biết). Hàm xác suất tích lũy thực nghiệm <span class="math inline">\(\widehat{F}_n(x)\)</span> trong <a href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html#eq:ecdf">(3.1)</a> là ước lượng của <span class="math inline">\(F_X(x)\)</span>. Ta mong muốn ước lượng được hàm mật độ xác suất <span class="math inline">\(f_X(x)\)</span> dựa trên mẫu ngẫu nhiên. Áp dụng định nghĩa của hàm mật độ xác suất, ta có thể viết
+<span class="math display">\[
+\widehat{f}_n(x) = \dfrac{\ud}{\ud x} \widehat{F}_n(x).
+\]</span>
+Tuy nhiên <span class="math inline">\(\widehat{F}_n(x)\)</span> là không liên tục, do đó ta cần áp dụng xấp xỉ sai phân trung tâm (central difference approximation) với bước nhảy <span class="math inline">\(h &gt; 0\)</span>, khi này, ta có
+<span class="math display" id="eq:dens-hist">\[\begin{eqnarray}
+\widehat{f}_n(x) &amp;=&amp; \dfrac{\widehat{F}_n(x + h/2) - \widehat{F}_n(x - h/2)}{h} \nonumber \\
+&amp;=&amp; \frac{1}{nh}\sum_{i = 1}^{n} \mathrm{I}\left(\frac{|Y_i - x|}{h} \le \frac{1}{2}\right) \tag{3.2}.
+\end{eqnarray}\]</span>
+Ước lượng này được gọi là ước lượng mật độ tần số thực nghiệm (the histogram estimator) được đề xuất và nghiên cứu các tính chất thống kê bởi <span class="citation">Freedman and Diaconis (<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-freedman1981histogram">1981</a>)</span>. Tham số <span class="math inline">\(h\)</span> được gọi là ``độ rộng’’ (bandwidth). Ta dễ dàng kiểm chứng được các tính chất cho <span class="math inline">\(\widehat{f}_n(x)\)</span> (xem thêm trong phụ lục …).</p>
+<p>Không giống như hàm phân phối tích lũy thực nghiệm, hàm mật độ tần số thực nghiệm bị ảnh hưởng bởi việc lựa chọn độ rộng <span class="math inline">\(h\)</span>. Khi <span class="math inline">\(h\)</span> càng nhỏ (<span class="math inline">\(h \to 0\)</span>) thì hàm mật độ tần số thực nghiệm sẽ càng gấp khúc, trong khi giá trị lớn của <span class="math inline">\(h\)</span> tạo ra ước lượng mật độ có vẻ trơn, tuy nhiên, nếu <span class="math inline">\(h\)</span> quá lớn thì tính chính xác của ước lượng không còn được đảm bảo. <span class="citation">Freedman and Diaconis (<a href="t%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o.html#ref-freedman1981histogram">1981</a>)</span> đề xuất một cách chọn <span class="math inline">\(h\)</span> ``tối ưu’’ là <span class="math inline">\(h_{\mathrm{opt}, \mathrm{FD}} = 2 \mathrm{IQR} n^{-1/3}\)</span>.</p>
+</div>
+<div id="trung-bình-mẫu-và-phương-sai-mẫu" class="section level3" number="3.2.3">
+<h3>
+<span class="header-section-number">3.2.3</span> Trung bình mẫu và phương sai mẫu<a class="anchor" aria-label="anchor" href="#trung-b%C3%ACnh-m%E1%BA%ABu-v%C3%A0-ph%C6%B0%C6%A1ng-sai-m%E1%BA%ABu"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="phân-vị-mẫu" class="section level3" number="3.2.4">
+<h3>
+<span class="header-section-number">3.2.4</span> Phân vị mẫu<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-v%E1%BB%8B-m%E1%BA%ABu"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="trực-quan-dữ-liệu-bởi-số-tổng-hợp" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Trực quan dữ liệu bởi số tổng hợp<a class="anchor" aria-label="anchor" href="#tr%E1%BB%B1c-quan-d%E1%BB%AF-li%E1%BB%87u-b%E1%BB%9Fi-s%E1%BB%91-t%E1%BB%95ng-h%E1%BB%A3p"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="trực-quan-dữ-liệu-bởi-biểu-đồ" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Trực quan dữ liệu bởi biểu đồ<a class="anchor" aria-label="anchor" href="#tr%E1%BB%B1c-quan-d%E1%BB%AF-li%E1%BB%87u-b%E1%BB%9Fi-bi%E1%BB%83u-%C4%91%E1%BB%93"><i class="fas fa-link"></i></a>
+</h2>
+<div id="biểu-đồ-stem-leaf" class="section level3" number="3.4.1">
+<h3>
+<span class="header-section-number">3.4.1</span> Biểu đồ stem-leaf<a class="anchor" aria-label="anchor" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-stem-leaf"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="biểu-đồ-điểm" class="section level3" number="3.4.2">
+<h3>
+<span class="header-section-number">3.4.2</span> Biểu đồ điểm<a class="anchor" aria-label="anchor" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-%C4%91i%E1%BB%83m"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="biểu-đồ-histogram" class="section level3" number="3.4.3">
+<h3>
+<span class="header-section-number">3.4.3</span> Biểu đồ histogram<a class="anchor" aria-label="anchor" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-histogram"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="biểu-đồ-boxplot" class="section level3" number="3.4.4">
+<h3>
+<span class="header-section-number">3.4.4</span> Biểu đồ boxplot<a class="anchor" aria-label="anchor" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-boxplot"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="biểu-đồ-mật-độ-xác-suất" class="section level3" number="3.4.5">
+<h3>
+<span class="header-section-number">3.4.5</span> Biểu đồ mật độ xác suất<a class="anchor" aria-label="anchor" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-m%E1%BA%ADt-%C4%91%E1%BB%99-x%C3%A1c-su%E1%BA%A5t"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="trực-quan-mối-liên-hệ-trong-dữ-liệu" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Trực quan mối liên hệ trong dữ liệu<a class="anchor" aria-label="anchor" href="#tr%E1%BB%B1c-quan-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-trong-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+</h2>
+<div id="biểu-đồ-side-by-side-boxplot" class="section level3" number="3.5.1">
+<h3>
+<span class="header-section-number">3.5.1</span> Biểu đồ side-by-side boxplot<a class="anchor" aria-label="anchor" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-side-by-side-boxplot"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="hệ-số-tương-quan" class="section level3" number="3.5.2">
+<h3>
+<span class="header-section-number">3.5.2</span> Hệ số tương quan<a class="anchor" aria-label="anchor" href="#h%E1%BB%87-s%E1%BB%91-t%C6%B0%C6%A1ng-quan"><i class="fas fa-link"></i></a>
+</h3>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn.html"><span class="header-section-number">2</span> Biến ngẫu nhiên</a></div>
+<div class="next"><a href="footnotes-and-citations.html"><span class="header-section-number">4</span> Footnotes and citations</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">3</span> Trực quan hóa dữ liệu</a></li>
+<li>
+<a class="nav-link" href="#s%E1%BB%B1-li%C3%AAn-h%E1%BB%87-gi%E1%BB%AFa-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0-bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn"><span class="header-section-number">3.1</span> Sự liên hệ giữa dữ liệu và biến ngẫu nhiên</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#d%E1%BB%AF-li%E1%BB%87u-v%C3%A0-bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn"><span class="header-section-number">3.1.1</span> Dữ liệu và biến ngẫu nhiên</a></li>
+<li><a class="nav-link" href="#s%E1%BB%B1-chuy%E1%BB%83n-%C4%91%E1%BB%95i-bi%E1%BA%BFn"><span class="header-section-number">3.1.2</span> Sự chuyển đổi biến</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-c%C3%A1c-%C4%91%E1%BA%B7c-tr%C6%B0ng-c%E1%BB%A7a-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">3.2</span> Ước lượng các đặc trưng của dữ liệu</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ph%C3%A2n-ph%E1%BB%91i-th%E1%BB%B1c-nghi%E1%BB%87m"><span class="header-section-number">3.2.1</span> Phân phối thực nghiệm</a></li>
+<li><a class="nav-link" href="#%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-m%E1%BA%ADt-%C4%91%E1%BB%99-x%C3%A1c-su%E1%BA%A5t"><span class="header-section-number">3.2.2</span> Ước lượng mật độ xác suất</a></li>
+<li><a class="nav-link" href="#trung-b%C3%ACnh-m%E1%BA%ABu-v%C3%A0-ph%C6%B0%C6%A1ng-sai-m%E1%BA%ABu"><span class="header-section-number">3.2.3</span> Trung bình mẫu và phương sai mẫu</a></li>
+<li><a class="nav-link" href="#ph%C3%A2n-v%E1%BB%8B-m%E1%BA%ABu"><span class="header-section-number">3.2.4</span> Phân vị mẫu</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#tr%E1%BB%B1c-quan-d%E1%BB%AF-li%E1%BB%87u-b%E1%BB%9Fi-s%E1%BB%91-t%E1%BB%95ng-h%E1%BB%A3p"><span class="header-section-number">3.3</span> Trực quan dữ liệu bởi số tổng hợp</a></li>
+<li>
+<a class="nav-link" href="#tr%E1%BB%B1c-quan-d%E1%BB%AF-li%E1%BB%87u-b%E1%BB%9Fi-bi%E1%BB%83u-%C4%91%E1%BB%93"><span class="header-section-number">3.4</span> Trực quan dữ liệu bởi biểu đồ</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-stem-leaf"><span class="header-section-number">3.4.1</span> Biểu đồ stem-leaf</a></li>
+<li><a class="nav-link" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-%C4%91i%E1%BB%83m"><span class="header-section-number">3.4.2</span> Biểu đồ điểm</a></li>
+<li><a class="nav-link" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-histogram"><span class="header-section-number">3.4.3</span> Biểu đồ histogram</a></li>
+<li><a class="nav-link" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-boxplot"><span class="header-section-number">3.4.4</span> Biểu đồ boxplot</a></li>
+<li><a class="nav-link" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-m%E1%BA%ADt-%C4%91%E1%BB%99-x%C3%A1c-su%E1%BA%A5t"><span class="header-section-number">3.4.5</span> Biểu đồ mật độ xác suất</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#tr%E1%BB%B1c-quan-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-trong-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">3.5</span> Trực quan mối liên hệ trong dữ liệu</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bi%E1%BB%83u-%C4%91%E1%BB%93-side-by-side-boxplot"><span class="header-section-number">3.5.1</span> Biểu đồ side-by-side boxplot</a></li>
+<li><a class="nav-link" href="#h%E1%BB%87-s%E1%BB%91-t%C6%B0%C6%A1ng-quan"><span class="header-section-number">3.5.2</span> Hệ số tương quan</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Cơ sở Thống kê cho Khoa học dữ liệu</strong>" was written by Tô Đức Khánh, Nguyễn Thị Hồng Nhung, Nguyễn Thành Duy, Hồ Hữu Bình, …. It was last built on 2026-07-01.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
